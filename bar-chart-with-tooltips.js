@@ -11,14 +11,6 @@ var div = d3.select("body").append("div")
     .attr("class", "tooltip")
     .style("opacity", 0);
 
-
-// function mousemove() {
-//   div
-//       // .text(d3.event.pageX + ", " + d3.event.pageY)
-//       .style("left", (d3.event.pageX - 34) + "px")
-//       .style("top", (d3.event.pageY - 12) + "px");
-// }
-
 function mousemove() {
   div.style("left", (d3.event.pageX + 10) + "px")
       .style("top", (d3.event.pageY - 38) + "px");
