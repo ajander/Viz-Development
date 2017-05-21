@@ -39,7 +39,11 @@ d3.tsv('./data.tsv', type, function(error, data) {
 		.data(data)
 	  .enter().append('g')
 	  	.attr('transform', function(d, i) { return 'translate(0,' + i * barHeight + ')'; })  	
-	 	.on("mouseover", mouseover)
+	 	.on("mouseover", function(d) {
+		  // div.attr('transform', function(d, i) { return 'translate(0,' + i * barHeight + ')'; });
+		  div.style("display", "inline")
+		  	.html(d.name + "<br/>"  + d.value);
+		})
 	    // .on("mousemove", mousemove)
 	    .on("mouseout", mouseout);
 
@@ -53,11 +57,7 @@ d3.tsv('./data.tsv', type, function(error, data) {
 	 	.attr('dy', '.35em')							// center the text vertically
 	 	.text(function(d) { return d.value; });
 
-	function mouseover() {
-	  div.attr('transform', function(d, i) { return 'translate(0,' + i * barHeight + ')'; });
-	  div.style("display", "inline")
-	  	.html(d.name + "<br/>"  + d.value);
-	}
+	
 
 })
 
