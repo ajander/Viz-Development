@@ -40,8 +40,8 @@ d3.tsv('./data.tsv', type, function(error, data) {
 	  .enter().append('g')
 	  	.attr('transform', function(d, i) { return 'translate(0,' + i * barHeight + ')'; })  	
 	 	.on("mouseover", function(d) {
-		  // div.attr('transform', function(d, i) { return 'translate(0,' + i * barHeight + ')'; });
-		  	div.style('width', x(d.value) + 'px')
+		  	// div.style('width', x(d.value) + 'px')
+		  	div.style('align','right')
 		  		.style("opacity", 0.9)
 		  		.html(d.name + "<br/>"  + d.value);
 		})
