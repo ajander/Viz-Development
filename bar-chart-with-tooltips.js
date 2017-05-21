@@ -40,7 +40,7 @@ d3.tsv('./data.tsv', type, function(error, data) {
 	  .enter().append('g')
 	  	.attr('transform', function(d, i) { return 'translate(0,' + i * barHeight + ')'; })  	
 	 	.on("mouseover", function(d) {
-		  // div.attr('transform', function(d, i) { return 'translate(0,' + i * barHeight + ')'; });
+		  div.attr('transform', function(d, i) { return 'translate(0,' + i * barHeight + ')'; });
 		  div.style("display", "inline")
 		  	.html(d.name + "<br/>"  + d.value);
 		})
