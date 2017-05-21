@@ -38,7 +38,10 @@ d3.tsv('./data.tsv', type, function(error, data) {
 
 	bar.append('rect')
 	 	.attr('width', function(d) { return x(d.value); })
-	 	.attr('height', barHeight - 1);
+	 	.attr('height', barHeight - 1)
+	 	.on("mouseover", mouseover)
+	    .on("mousemove", mousemove)
+	    .on("mouseout", mouseout);
 
 	bar.append('text')
 	 	.attr('x', function(d) { return x(d.value) - 3; })		// x position of text
