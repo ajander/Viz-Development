@@ -11,6 +11,21 @@ var div = d3.select("body").append("div")
     .attr("class", "tooltip")
     .style("display", "none");
 
+function mouseover() {
+  div.style("display", "inline");
+}
+
+function mousemove() {
+  div
+      .text(d3.event.pageX + ", " + d3.event.pageY)
+      .style("left", (d3.event.pageX - 34) + "px")
+      .style("top", (d3.event.pageY - 12) + "px");
+}
+
+function mouseout() {
+  div.style("display", "none");
+}
+
 d3.tsv('./data.tsv', type, function(error, data) {
 	x.domain([0, d3.max(data, function(d) { return d.value; })]);
 
