@@ -38,14 +38,14 @@ d3.tsv('./data.tsv', type, function(error, data) {
 	var bar = chart.selectAll('g')
 		.data(data)
 	  .enter().append('g')
-	  	.attr('transform', function(d, i) { return 'translate(0,' + i * barHeight + ')'; });
-
-	bar.append('rect')
-	 	.attr('width', function(d) { return x(d.value); })
-	 	.attr('height', barHeight - 1)  	
+	  	.attr('transform', function(d, i) { return 'translate(0,' + i * barHeight + ')'; })  	
 	 	.on("mouseover", mouseover)
 	    // .on("mousemove", mousemove)
 	    .on("mouseout", mouseout);
+
+	bar.append('rect')
+	 	.attr('width', function(d) { return x(d.value); })
+	 	.attr('height', barHeight - 1);
 
 	bar.append('text')
 	 	.attr('x', function(d) { return x(d.value) - 3; })		// x position of text
