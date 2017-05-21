@@ -31,7 +31,7 @@ d3.tsv('./data.tsv', type, function(error, data) {
             div.transition()		
                 .duration(500)		
                 .style("opacity", 0); 
-	  });
+	  		});
 
 	bar.append('rect')
 	 	.attr('width', function(d) { return x(d.value); })
@@ -47,6 +47,6 @@ d3.tsv('./data.tsv', type, function(error, data) {
 function type(d) {
 	d.value = +d.value;	// coerce to number type
 	return d;
-}
+};
 
 
