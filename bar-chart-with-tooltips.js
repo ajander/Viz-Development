@@ -25,7 +25,7 @@ d3.tsv('./data.tsv', type, function(error, data) {
             div.transition()		
                 .duration(200)		
                 .style("opacity", .9);		
-            div	.html("This bar:" + "<br/>" + (d.name) + "<br/>"  + d.value);	
+            div	.html("This bar:<br/>" + d.name + "<br/>"  + d.value);	
             })					
         .on("mouseout", function(d) {		
             div.transition()		
