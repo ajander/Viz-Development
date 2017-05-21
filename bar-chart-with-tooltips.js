@@ -44,7 +44,7 @@ d3.tsv('./data.tsv', type, function(error, data) {
 	 	.attr('width', function(d) { return x(d.value); })
 	 	.attr('height', barHeight - 1)  	
 	 	.on("mouseover", mouseover)
-	    .on("mousemove", mousemove)
+	    // .on("mousemove", mousemove)
 	    .on("mouseout", mouseout);
 
 	bar.append('text')
@@ -53,7 +53,8 @@ d3.tsv('./data.tsv', type, function(error, data) {
 	 	.attr('dy', '.35em')							// center the text vertically
 	 	.text(function(d) { return d.value; });
 
-	div.attr('x', function(d) { return x(d.value) - 3; })
+	div.attr('transform', function(d, i) { return 'translate(0,' + i * barHeight + ')'; })
+		.attr('x', function(d) { return x(d.value) - 3; })
 		.attr('y', barHeight / 2)						// y position of text, relative to g
 	 	.attr('dy', '.35em');
 
