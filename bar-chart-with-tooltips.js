@@ -9,7 +9,7 @@ var chart = d3.select('.chart')
 
 var div = d3.select("body").append("div")
     .attr("class", "tooltip")
-    .style("display", "none");
+    .style("opacity", 0);
 
 
 // function mousemove() {
@@ -27,7 +27,7 @@ var div = d3.select("body").append("div")
 // }
 
 function mouseout() {
-  div.style("display", "none");
+  div.style("opacity", 0);
 }
 
 d3.tsv('./data.tsv', type, function(error, data) {
@@ -41,7 +41,7 @@ d3.tsv('./data.tsv', type, function(error, data) {
 	  	.attr('transform', function(d, i) { return 'translate(0,' + i * barHeight + ')'; })  	
 	 	.on("mouseover", function(d) {
 		  div.attr('transform', function(d, i) { return 'translate(0,' + i * barHeight + ')'; });
-		  div.style("display", "inline")
+		  div.style("opacity", 0.9)
 		  	.html(d.name + "<br/>"  + d.value);
 		})
 	    // .on("mousemove", mousemove)
