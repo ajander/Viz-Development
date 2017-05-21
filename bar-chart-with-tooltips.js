@@ -5,7 +5,12 @@ var x = d3.scale.linear()
 	.range([0, 420]);
 
 var chart = d3.select('.chart')
-	.attr('width', width)
+	.attr('width', width);
+
+// Define the div for the tooltip
+var div = d3.select(".chart").append("div")	
+    .attr("class", "tooltip")				
+    .style("opacity", 0);
 
 d3.tsv('./data.tsv', type, function(error, data) {
 	x.domain([0, d3.max(data, function(d) { return d.value; })]);
@@ -20,9 +25,7 @@ d3.tsv('./data.tsv', type, function(error, data) {
             div.transition()		
                 .duration(200)		
                 .style("opacity", .9);		
-            div	.html("This bar:" + "<br/>" + (d.name) + "<br/>"  + d.value)	
-                .style("left", (d3.event.pageX) + "px")		
-                .style("top", (d3.event.pageY - 28) + "px");	
+            div	.html("This bar:" + "<br/>" + (d.name) + "<br/>"  + d.value);	
             })					
         .on("mouseout", function(d) {		
             div.transition()		
