@@ -8,7 +8,7 @@ var chart = d3.select('.chart')
 	.attr('width', width);
 
 // Define the div for the tooltip
-var div = d3.select(".chart").append("div")	
+var div = d3.select("body").append("div")	
     .attr("class", "tooltip")				
     .style("opacity", 0);
 
