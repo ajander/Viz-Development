@@ -5,27 +5,7 @@ var x = d3.scale.linear()
 	.range([0, 420]);
 
 var chart = d3.select('.chart')
-	.attr('width', width);
-
-// Define the div for the tooltip
-var div = d3.select("body").append("div")	
-    .attr("class", "tooltip")				
-    .style("display", "none");
-
-function mouseover() {
-  div.style("display", "inline");
-}
-
-function mousemove() {
-  div
-      .text(d3.event.pageX + ", " + d3.event.pageY)
-      .style("left", (d3.event.pageX - 34) + "px")
-      .style("top", (d3.event.pageY - 12) + "px");
-}
-
-function mouseout() {
-  div.style("display", "none");
-}
+	.attr('width', width)
 
 d3.tsv('./data.tsv', type, function(error, data) {
 	x.domain([0, d3.max(data, function(d) { return d.value; })]);
@@ -35,10 +15,7 @@ d3.tsv('./data.tsv', type, function(error, data) {
 	var bar = chart.selectAll('g')
 		.data(data)
 	  .enter().append('g')
-	  	.attr('transform', function(d, i) { return 'translate(0,' + i * barHeight + ')'
-	  	.on("mouseover", mouseover)	
-	  	.on("mousemove", mousemove)				
-        .on("mouseout", mouseout);
+	  	.attr('transform', function(d, i) { return 'translate(0,' + i * barHeight + ')'; });
 
 	bar.append('rect')
 	 	.attr('width', function(d) { return x(d.value); })
@@ -55,5 +32,6 @@ function type(d) {
 	d.value = +d.value;	// coerce to number type
 	return d;
 }
+
 
 
