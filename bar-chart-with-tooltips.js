@@ -12,12 +12,12 @@ var div = d3.select("body").append("div")
     .style("display", "none");
 
 
-// function mousemove() {
-//   div
-//       .text(d3.event.pageX + ", " + d3.event.pageY)
-//       .style("left", (d3.event.pageX - 34) + "px")
-//       .style("top", (d3.event.pageY - 12) + "px");
-// }
+function mousemove() {
+  div
+      // .text(d3.event.pageX + ", " + d3.event.pageY)
+      .style("left", (d3.event.pageX - 34) + "px")
+      .style("top", (d3.event.pageY - 12) + "px");
+}
 
 function mouseout() {
   div.style("display", "none");
@@ -35,14 +35,14 @@ d3.tsv('./data.tsv', type, function(error, data) {
 	var bar = chart.selectAll('g')
 		.data(data)
 	  .enter().append('g')
-	  	.attr('transform', function(d, i) { return 'translate(0,' + i * barHeight + ')'; })  	
-	 	.on("mouseover", mouseover)
-	    .on("mousemove", mousemove)
-	    .on("mouseout", mouseout);
+	  	.attr('transform', function(d, i) { return 'translate(0,' + i * barHeight + ')'; });
 
 	bar.append('rect')
 	 	.attr('width', function(d) { return x(d.value); })
-	 	.attr('height', barHeight - 1);
+	 	.attr('height', barHeight - 1)  	
+	 	.on("mouseover", mouseover)
+	    .on("mousemove", mousemove)
+	    .on("mouseout", mouseout);
 
 	bar.append('text')
 	 	.attr('x', function(d) { return x(d.value) - 3; })		// x position of text
