@@ -20,10 +20,8 @@ var div = d3.select("body").append("div")
 // }
 
 function mousemove() {
-  div
-      // .text(d3.event.pageX + ", " + d3.event.pageY)
-      .style("left", "2px")
-      .style("top", "2px");
+  div.style("left", (d3.event.pageX + 10) + "px")
+      .style("top", (d3.event.pageY - 38) + "px");
 }
 
 function mouseout() {
@@ -40,9 +38,7 @@ d3.tsv('./data.tsv', type, function(error, data) {
 	  .enter().append('g')
 	  	.attr('transform', function(d, i) { return 'translate(0,' + i * barHeight + ')'; })  	
 	 	.on("mouseover", function(d, i) {
-		  	div.style("left", (d3.event.pageX + 20) + "px")		
-                .style("top", (d3.event.pageY - 34) + "px")
-		  		.style("opacity", 0.9)
+		  	div.style("opacity", 0.9)
 		  		.html(d.name + "<br/>"  + d.value);
 		})
 	    .on("mousemove", mousemove)
