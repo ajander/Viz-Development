@@ -7,6 +7,10 @@ var x = d3.scale.linear()
 var chart = d3.select('.chart')
 	.attr('width', width)
 
+var div = d3.select("body").append("div")
+    .attr("class", "tooltip")
+    .style("display", "none");
+
 d3.tsv('./data.tsv', type, function(error, data) {
 	x.domain([0, d3.max(data, function(d) { return d.value; })]);
 
