@@ -12,11 +12,18 @@ var div = d3.select("body").append("div")
     .style("display", "none");
 
 
+// function mousemove() {
+//   div
+//       // .text(d3.event.pageX + ", " + d3.event.pageY)
+//       .style("left", (d3.event.pageX - 34) + "px")
+//       .style("top", (d3.event.pageY - 12) + "px");
+// }
+
 function mousemove() {
   div
       // .text(d3.event.pageX + ", " + d3.event.pageY)
-      .style("left", (d3.event.pageX - 34) + "px")
-      .style("top", (d3.event.pageY - 12) + "px");
+      .style("left", "2px")
+      .style("top", "2px");
 }
 
 function mouseout() {
