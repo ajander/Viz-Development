@@ -53,13 +53,10 @@ d3.tsv('./data.tsv', type, function(error, data) {
 	 	.attr('dy', '.35em')							// center the text vertically
 	 	.text(function(d) { return d.value; });
 
-	div.attr('transform', function(d, i) { return 'translate(0,' + i * barHeight + ')'; })
-		.attr('x', function(d) { return x(d.value) - 3; })
-		.attr('y', barHeight / 2)						// y position of text, relative to g
-	 	.attr('dy', '.35em');
-
 	function mouseover() {
-	  div.style("display", "inline");
+	  div.attr('transform', function(d, i) { return 'translate(0,' + i * barHeight + ')'; });
+	  div.style("display", "inline")
+	  	.html(d.name + "<br/>"  + d.value);
 	}
 
 })
