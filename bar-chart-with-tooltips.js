@@ -19,12 +19,12 @@ var div = d3.select("body").append("div")
 //       .style("top", (d3.event.pageY - 12) + "px");
 // }
 
-function mousemove() {
-  div
-      // .text(d3.event.pageX + ", " + d3.event.pageY)
-      .style("left", "2px")
-      .style("top", "2px");
-}
+// function mousemove() {
+//   div
+//       // .text(d3.event.pageX + ", " + d3.event.pageY)
+//       .style("left", "2px")
+//       .style("top", "2px");
+// }
 
 function mouseout() {
   div.style("display", "none");
@@ -32,10 +32,6 @@ function mouseout() {
 
 d3.tsv('./data.tsv', type, function(error, data) {
 	x.domain([0, d3.max(data, function(d) { return d.value; })]);
-
-	function mouseover() {
-	  div.style("display", "inline");
-	}
 
 	chart.attr('height', barHeight * data.length);
 
@@ -56,6 +52,15 @@ d3.tsv('./data.tsv', type, function(error, data) {
 	 	.attr('y', barHeight / 2)						// y position of text, relative to g
 	 	.attr('dy', '.35em')							// center the text vertically
 	 	.text(function(d) { return d.value; });
+
+	div.attr('x', function(d) { return x(d.value) - 3; })
+		.attr('y', barHeight / 2)						// y position of text, relative to g
+	 	.attr('dy', '.35em');
+
+	function mouseover() {
+	  div.style("display", "inline");
+	}
+
 })
 
 function type(d) {
