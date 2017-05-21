@@ -8,7 +8,7 @@ var chart = d3.select('.chart')
 	.attr('width', width);
 
 // Define the div for the tooltip
-var div = d3.select("body").append("div")	
+var div = d3.select(".chart").append("div")	
     .attr("class", "tooltip")				
     .style("opacity", 0);
 
@@ -25,7 +25,7 @@ d3.tsv('./data.tsv', type, function(error, data) {
             div.transition()		
                 .duration(200)		
                 .style("opacity", .9);		
-            div	.html("This bar:<br/>" + d.name + "<br/>"  + d.value);	
+            div.html("This bar:<br/>" + d.name + "<br/>"  + d.value);	
             })					
         .on("mouseout", function(d) {		
             div.transition()		
