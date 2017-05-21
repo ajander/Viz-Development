@@ -15,7 +15,20 @@ d3.tsv('./data.tsv', type, function(error, data) {
 	var bar = chart.selectAll('g')
 		.data(data)
 	  .enter().append('g')
-	  	.attr('transform', function(d, i) { return 'translate(0,' + i * barHeight + ')'; });
+	  	.attr('transform', function(d, i) { return 'translate(0,' + i * barHeight + ')'
+	  	.on("mouseover", function(d) {		
+            div.transition()		
+                .duration(200)		
+                .style("opacity", .9);		
+            div	.html("This bar:" + "<br/>" + (d.name) + "<br/>"  + d.value)	
+                .style("left", (d3.event.pageX) + "px")		
+                .style("top", (d3.event.pageY - 28) + "px");	
+            })					
+        .on("mouseout", function(d) {		
+            div.transition()		
+                .duration(500)		
+                .style("opacity", 0); 
+	  });
 
 	bar.append('rect')
 	 	.attr('width', function(d) { return x(d.value); })
