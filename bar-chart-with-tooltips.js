@@ -31,7 +31,7 @@ d3.tsv('./data.tsv', type, function(error, data) {
 	  	.attr('transform', function(d, i) { return 'translate(0,' + i * barHeight + ')'; })  	
 	 	.on("mouseover", function(d, i) {
 		  	div.style("opacity", 1)
-		  		.html("<strong>" + d.name + "</strong><br/><hr/>"  + d.value);
+		  		.html("<strong>Data</strong><hr/>" + d.name + ", "  + d.value);
 		})
 	    .on("mousemove", mousemove)
 	    .on("mouseout", mouseout);
