@@ -12,14 +12,16 @@ var chart = d3.select('.chart')
 	.attr('height', height)
 
 d3.csv('./data-CS-degrees.csv', row, function(error, data) {
+
+	data.sort(function(a, b) { return b.value - a.value; });
+
 	x.domain(data.map(function(d) { return d.country; }));
 	y.domain([0, d3.max(data, function(d) { return d.value; })]);
 
 	var barWidth = width / data.length;
 
 	var bar = chart.selectAll('g')
-		// .data(data)
-		.data(data.sort(function(a, b) { return b.value - a.value; }))
+		.data(data)
 	  .enter().append('g')
 	  	.attr('transform', function(d, i) { return 'translate(' + x(d.country) + ',0)'; });
 
