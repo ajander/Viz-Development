@@ -1,5 +1,6 @@
-var width = 960,
- 	height = 500;
+var margin = {top: 20, right: 30, bottom: 30, left: 40},
+	width = 960 - margin.right - margin.left,
+ 	height = 500 - margin.top - margin.bottom;
 
 var x = d3.scale.ordinal()
 	.rangeRoundBands([0, width], .1);	// .1 is padding between bars?
@@ -7,13 +8,16 @@ var x = d3.scale.ordinal()
 var y = d3.scale.linear()
 	.range([height, 0]);
 
+// append g means elements added to chart will inherit margins
 var chart = d3.select('.chart')
-	.attr('width', width)
-	.attr('height', height)
+	.attr('width', width + margin.right + margin.left)
+	.attr('height', height + margin.top + margin.bottom)
+  .append('g')
+  	.attr('transform', 'translate(' + margin.left + ',' + margin.top + ')');
 
 d3.csv('./data-CS-degrees.csv', row, function(error, data) {
 
-	data.sort(function(a, b) { return b.value - a.value; });
+	data.sort(function(a, b) { return b.value - a.value; });	// sort descending
 
 	x.domain(data.map(function(d) { return d.country; }));
 	y.domain([0, d3.max(data, function(d) { return d.value; })]);
@@ -32,7 +36,6 @@ d3.csv('./data-CS-degrees.csv', row, function(error, data) {
 
 	bar.append('text')
 	 	.attr('x', x.rangeBand() / 2 + 10)
-	 	// .attr('dx', '.35em')
 	 	.attr('y', function(d) { return y(d.value) + 3; })
 	 	.attr('dy', '.75em')							// center the text vertically
 	 	.text(function(d) { return String(d.value) + '%'; });
