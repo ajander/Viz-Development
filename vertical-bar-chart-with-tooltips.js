@@ -3,7 +3,7 @@
 // https://bl.ocks.org/rcrocker13/66a11b84ff86edc61ffb61b3d99cf02a (for sorting)
 // https://bost.ocks.org/mike/bar/3/ (for everything else)
 
-var margin = {top: 20, right: 30, bottom: 30, left: 20},
+var margin = {top: 20, right: 30, bottom: 100, left: 30},
 	width = 960 - margin.right - margin.left,
  	height = 500 - margin.top - margin.bottom;
 
@@ -25,21 +25,28 @@ d3.csv('./data-CS-degrees.csv', row, function(error, data) {
 	x.domain(data.map(function(d) { return d.Country; }));
 	y.domain([0, d3.max(data, function(d) { return d.Percent; })]);
 
-	g.append('g')
-      .attr("class", "axis axis--x")
-      .attr("transform", "translate(0," + height + ")")
-      .call(d3.axisBottom(x));
+	var xAxis = d3.axisBottom(x),
+		yAxis = d3.axisLeft(y).ticks(5, '%');
 
+	// add X axis
+	g.append('g')
+      .attr("class", "axis")
+      .attr("transform", "translate(0," + (height + 2) + ")")
+      .call(xAxis)
+      .selectAll('text')
+      	.attr("transform", "rotate(-90)")
+
+    // add Y axis
     g.append("g")
-      .attr("class", "axis axis--y")
-      .attr("transform", "translate(" + (margin.left - 15) + ")")
-      .call(d3.axisLeft(y))
-    .append("text")
-      .attr("transform", "rotate(-90)")
-      .attr("y", 6)
-      .attr("dy", "0.71em")
-      .attr("text-anchor", "end")
-      .text("Frequency");
+      .attr("class", "axis")
+      .call(yAxis);
+      // .append("text")
+	     //  .attr("transform", "rotate(-90)")
+	     //  .attr('x', -160)
+	     //  .attr("y", -50)
+	     //  .attr("dy", "0.71em")
+	     //  .attr("text-anchor", "end")
+	     //  .text("Percentage");
 
 	g.selectAll('.bar')
 		.data(data)
@@ -56,12 +63,12 @@ d3.csv('./data-CS-degrees.csv', row, function(error, data) {
 // function row(d) {
 // 	return {
 // 		country: d.Country,
-// 		value: +Math.round(d.Percent)	// convert 2012 percent to number type
+// 		value: +Math.round(d.Percent/100).toFixed(2)	// convert 2012 percent to number type
 // 	};
 // }
 
 // row conversion function
 function row(d) {
-	d.Percent = +d.Percent; 
+	d.Percent = Math.round(d.Percent)/100; 
 	return d;
 }
