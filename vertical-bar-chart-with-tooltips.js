@@ -32,6 +32,7 @@ d3.csv('./data-CS-degrees.csv', row, function(error, data) {
 
     g.append("g")
       .attr("class", "axis axis--y")
+      .attr("transform", "translate(" + (margin.left - 15) + ")")
       .call(d3.axisLeft(y))
     .append("text")
       .attr("transform", "rotate(-90)")
