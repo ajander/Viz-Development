@@ -18,7 +18,8 @@ d3.csv('./data-CS-degrees.csv', row, function(error, data) {
 	var barWidth = width / data.length;
 
 	var bar = chart.selectAll('g')
-		.data(data)
+		// .data(data)
+		.data(data.sort(function(a, b) { return b.value - a.value; }))
 	  .enter().append('g')
 	  	.attr('transform', function(d, i) { return 'translate(' + x(d.country) + ',0)'; });
 
