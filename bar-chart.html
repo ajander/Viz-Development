@@ -7,7 +7,7 @@
 }
 
 .chart text {
-  fill: white;
+  fill: black;
   font: 9px sans-serif;
   text-anchor: end;
 }
@@ -21,6 +21,10 @@
   fill: none;
   stroke: #000;
   shape-rendering: crispEdges;
+}
+
+.axis--x path {
+  display: none;
 }
 
 div.tooltip {	
@@ -42,7 +46,8 @@ div.tooltip {
 <body>
 
 	<svg class="chart"></svg>
-	<script src="http://d3js.org/d3.v3.min.js" charset="utf-8"></script>
+	<!-- <script src="http://d3js.org/d3.v3.min.js" charset="utf-8"></script> -->
+  <script src="https://d3js.org/d3.v4.min.js" charset="utf-8"></script>
 	<script src="vertical-bar-chart-with-tooltips.js"></script>
 
 </body>
