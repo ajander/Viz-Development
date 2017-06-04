@@ -1,3 +1,9 @@
+// Resources:
+// http://www.oecd.org/gender/data/percentageoftertiaryqualificationsawardedtowomenbyfieldofeducation.htm (for data)
+// https://bl.ocks.org/rcrocker13/66a11b84ff86edc61ffb61b3d99cf02a (for sorting)
+// https://bost.ocks.org/mike/bar/3/ (for everything else)
+
+
 var margin = {top: 20, right: 30, bottom: 30, left: 40},
 	width = 960 - margin.right - margin.left,
  	height = 500 - margin.top - margin.bottom;
