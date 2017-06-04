@@ -14,6 +14,14 @@ var x = d3.scale.ordinal()
 var y = d3.scale.linear()
 	.range([height, 0]);
 
+var xAxis = d3.svg.axis()
+	.scale(x)
+	.orient('bottom');
+
+var yAxis = d3.svg.axis()
+	.scale(y)
+	.orient('left');
+
 // append g means elements added to chart will inherit margins
 var chart = d3.select('.chart')
 	.attr('width', width + margin.right + margin.left)
@@ -28,7 +36,16 @@ d3.csv('./data-CS-degrees.csv', row, function(error, data) {
 	x.domain(data.map(function(d) { return d.country; }));
 	y.domain([0, d3.max(data, function(d) { return d.value; })]);
 
-	var barWidth = width / data.length;
+	// var barWidth = width / data.length;
+
+	chart.append("g")
+      .attr("class", "axis")
+      .attr("transform", "translate(0," + height + ")")
+      .call(xAxis);
+
+  	chart.append("g")
+      .attr("class", "axis")
+      .call(yAxis);
 
 	var bar = chart.selectAll('g')
 		.data(data)
