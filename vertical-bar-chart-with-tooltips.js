@@ -1,11 +1,8 @@
-// var width = 420,
-//  	barHeight = 20;
-
 var width = 960,
  	height = 500;
 
-// var x = d3.scale.linear()
-// 	.range([0, 420]);
+var x = d3.scale.ordinal()
+	.rangeRoundBands([0, width], .1);	// .1 is padding between bars?
 
 var y = d3.scale.linear()
 	.range([height, 0]);
@@ -15,6 +12,7 @@ var chart = d3.select('.chart')
 	.attr('height', height)
 
 d3.csv('./data-CS-degrees.csv', row, function(error, data) {
+	x.domain(data.map(function(d) { return d.country; }));
 	y.domain([0, d3.max(data, function(d) { return d.value; })]);
 
 	var barWidth = width / data.length;
@@ -22,15 +20,15 @@ d3.csv('./data-CS-degrees.csv', row, function(error, data) {
 	var bar = chart.selectAll('g')
 		.data(data)
 	  .enter().append('g')
-	  	.attr('transform', function(d, i) { return 'translate(' + i * barWidth + ',0)'; });
+	  	.attr('transform', function(d, i) { return 'translate(' + x(d.country) + ',0)'; });
 
 	bar.append('rect')
 		.attr('y', function(d) { return y(d.value); })
 	 	.attr('height', function(d) { return height - y(d.value); })
-	 	.attr('width', barWidth - 1);
+	 	.attr('width', x.rangeBand());
 
 	bar.append('text')
-	 	.attr('x', barWidth / 2 + 10)
+	 	.attr('x', x.rangeBand() / 2 + 10)
 	 	// .attr('dx', '.35em')
 	 	.attr('y', function(d) { return y(d.value) + 3; })
 	 	.attr('dy', '.75em')							// center the text vertically
