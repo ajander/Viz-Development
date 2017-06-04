@@ -65,7 +65,7 @@ d3.csv('./data-CS-degrees.csv', row, function(error, data) {
 		g.selectAll(".tick text").attr("x", 4).attr("dy", -4);
 	}
 
-	g.selectAll('.bar')
+	var bar = g.selectAll('.bar')
 		.data(data)
 	  .enter().append('rect')
 	  	.attr('class', 'bar')
@@ -73,6 +73,26 @@ d3.csv('./data-CS-degrees.csv', row, function(error, data) {
 	 	.attr('y', function(d) { return y(d.Percent); })
 	  	.attr('height', function(d) { return height - y(d.Percent); })
 	 	.attr('width', x.bandwidth())
+
+	// WORK ON THIS, instead of the block above, to get mark labels to show...
+	// var bar = g.selectAll('.bar')
+	// 	.data(data)
+	//   .enter().append('g')
+	//   	.attr('class', 'bar')
+	// 	.attr('x', function(d) { return x(d.Country); })
+	//  	.attr('y', function(d) { return y(d.Percent); });
+	//   	// .attr('class', 'bar')
+
+	// bar.append('rect')
+	//   	.attr('height', function(d) { return height - y(d.Percent); })
+	//  	.attr('width', x.bandwidth());
+
+	// bar.append('text')
+	//   	.attr('x', function(d) { return x(d.Country); })		// x position of text
+	//  	.attr('y', function(d) { return y(d.Percent); })						// y position of text, relative to g
+	//  	.attr('dy', '.35em')							// center the text vertically
+	//  	.attr('color', 'black')
+	//  	.text(function(d) { return d.Percent; });
 
 })
 
