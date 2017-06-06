@@ -79,7 +79,7 @@ d3.csv('./data-CS-degrees.csv', row, function(error, data) {
 	  	.on("mouseover", function(d, i) {
 		  	div.style("opacity", 1)
 		  		.html('<strong><span style="font-size:11px">' + d.Country + 
-		  			"</strong></span><br/>Women earn <strong><font color=#ff9900>"  
+		  			"</strong></span><br/>Women earned <strong><font color=#ff9900>"  
 		  			+ Math.round(100*d.Percent) + '%</strong></font> of CS degrees');
 		})
 	    .on("mousemove", mousemove)
@@ -96,6 +96,15 @@ d3.csv('./data-CS-degrees.csv', row, function(error, data) {
 	 	.attr('y', function(d) { return y(d.Percent); })
 	 	.attr('dy', '1em')	
 	 	.text(function(d) { return String(Math.round(100*d.Percent)) + '%'; });
+
+	// add chart title
+	chart.append("text")
+		.attr('class', 'caption')
+        .attr("x", margin.left)             
+        .attr("y", margin.top + height)
+        .style('color', 'black')
+        .style("font-size", "10px") 
+        .text("This is my caption");
 
 })
 
