@@ -50,13 +50,6 @@ d3.csv('./data-CS-degrees.csv', row, function(error, data) {
     g.append("g")
       .attr("class", "axis")
       .call(yAxis);
-      // .append("text")
-	     //  .attr("transform", "rotate(-90)")
-	     //  .attr('x', -160)
-	     //  .attr("y", -50)
-	     //  .attr("dy", "0.71em")
-	     //  .attr("text-anchor", "end")
-	     //  .text("Percentage");
 
 	function customYAxis(g) {
 		g.call(yAxis);
@@ -67,42 +60,22 @@ d3.csv('./data-CS-degrees.csv', row, function(error, data) {
 
 	var bar = g.selectAll('.bar')
 		.data(data)
-	  .enter().append('rect')
-	  	.attr('class', 'bar')
-	  	.attr('x', function(d) { return x(d.Country); })
-	 	.attr('y', function(d) { return y(d.Percent); })
+	  .enter().append('g')
+	  	.attr('class', 'bar');
+
+	bar.append('rect')
 	  	.attr('height', function(d) { return height - y(d.Percent); })
 	 	.attr('width', x.bandwidth())
+	 	.attr('x', function(d) { return x(d.Country); })
+	 	.attr('y', function(d) { return y(d.Percent); });
 
-	// WORK ON THIS, instead of the block above, to get mark labels to show...
-	// var bar = g.selectAll('.bar')
-	// 	.data(data)
-	//   .enter().append('g')
-	//   	.attr('class', 'bar')
-	// 	.attr('x', function(d) { return x(d.Country); })
-	//  	.attr('y', function(d) { return y(d.Percent); });
-	//   	// .attr('class', 'bar')
-
-	// bar.append('rect')
-	//   	.attr('height', function(d) { return height - y(d.Percent); })
-	//  	.attr('width', x.bandwidth());
-
-	// bar.append('text')
-	//   	.attr('x', function(d) { return x(d.Country); })		// x position of text
-	//  	.attr('y', function(d) { return y(d.Percent); })						// y position of text, relative to g
-	//  	.attr('dy', '.35em')							// center the text vertically
-	//  	.attr('color', 'black')
-	//  	.text(function(d) { return d.Percent; });
+	bar.append('text')
+	  	.attr('x', function(d) { return x(d.Country) + x.bandwidth(); })
+	 	.attr('y', function(d) { return y(d.Percent); })
+	 	.attr('dy', '1em')	
+	 	.text(function(d) { return String(Math.round(100*d.Percent)) + '%'; });
 
 })
-
-// // row conversion function
-// function row(d) {
-// 	return {
-// 		country: d.Country,
-// 		value: +Math.round(d.Percent/100).toFixed(2)	// convert 2012 percent to number type
-// 	};
-// }
 
 // row conversion function
 function row(d) {
