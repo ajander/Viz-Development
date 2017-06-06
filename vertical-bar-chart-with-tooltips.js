@@ -19,6 +19,20 @@ var x = d3.scaleBand().rangeRound([0, width]).padding(0.1),
 var g = chart.append('g')
   	.attr('transform', 'translate(' + margin.left + ',' + margin.top + ')');
 
+// tooltips
+var div = d3.select("body").append("div")
+    .attr("class", "tooltip")
+    .style("opacity", 0);
+
+function mousemove() {
+  div.style("left", (d3.event.pageX + 10) + "px")
+      .style("top", (d3.event.pageY - 38) + "px");
+}
+
+function mouseout() {
+  div.style("opacity", 0);
+}
+
 d3.csv('./data-CS-degrees.csv', row, function(error, data) {
 
 	data.sort(function(a, b) { return b.Percent - a.Percent; });	// sort descending
@@ -61,7 +75,15 @@ d3.csv('./data-CS-degrees.csv', row, function(error, data) {
 	var bar = g.selectAll('.bar')
 		.data(data)
 	  .enter().append('g')
-	  	.attr('class', 'bar');
+	  	.attr('class', 'bar')
+	  	.on("mouseover", function(d, i) {
+		  	div.style("opacity", 1)
+		  		.html('<strong><span style="font-size:11px">' + d.Country + 
+		  			"</strong></span><br/>Women earn <strong><font color=#ff9900>"  
+		  			+ Math.round(100*d.Percent) + '%</strong></font> of CS degrees');
+		})
+	    .on("mousemove", mousemove)
+	    .on("mouseout", mouseout);
 
 	bar.append('rect')
 	  	.attr('height', function(d) { return height - y(d.Percent); })
